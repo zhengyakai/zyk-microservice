@@ -12,7 +12,7 @@
     <artifactId>zyk-commons</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>zyk-redisson-springboot-starter</module>
+        <module>zyk-redis-springboot-starter</module>
     </modules>
 
 
