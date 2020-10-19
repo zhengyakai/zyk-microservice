@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.zhengyk.redisson.RedissonAutoConfig
+cn.zhengyk.redis.RedissonAutoConfig,\
+cn.zhengyk.redis.RedisAutoConfigure  
