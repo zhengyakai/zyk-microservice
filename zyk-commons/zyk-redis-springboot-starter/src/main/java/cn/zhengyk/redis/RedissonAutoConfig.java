@@ -17,7 +17,7 @@ import java.util.List;
  * 根据 springboot 的 RedisProperties 配置 Redisson
  * @author yakai.zheng
  */
-@Configuration
+//@Configuration
 @EnableConfigurationProperties(RedisProperties.class)
 public class RedissonAutoConfig {
 

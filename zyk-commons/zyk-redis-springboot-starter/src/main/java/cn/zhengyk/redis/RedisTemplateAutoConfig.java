@@ -24,7 +24,7 @@ import java.util.Map;
  */
 @EnableConfigurationProperties(RedisProperties.class)
 @EnableCaching
-public class RedisAutoConfigure {
+public class RedisTemplateAutoConfig {
 
     @Bean
     public RedisSerializer<String> redisKeySerializer() {
