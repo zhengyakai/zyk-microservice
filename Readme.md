@@ -34,5 +34,6 @@ binlog监听、同步: Canal
 
 监控：Prometheus、Grafana
 
+文件中心：阿里云、七牛云
 
 
