@@ -144,7 +144,7 @@ public class RedisUtils {
      * 弹出变量中的元素
      */
     public Object pop(String key) {
-        return redisTemplate.opsForSet().pop("setValue");
+        return redisTemplate.opsForSet().pop(key);
     }
 
     /**
@@ -269,7 +269,7 @@ public class RedisUtils {
      * 获取集合指定位置的值。
      */
     public Object index(String key, long index) {
-        return redisTemplate.opsForList().index("list", 1);
+        return redisTemplate.opsForList().index(key, index);
     }
 
     /**

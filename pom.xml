@@ -32,10 +32,11 @@
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-io.version>2.6</commons-io.version>
         <commons-collections4.version>4.4</commons-collections4.version>
-        <fastjson.version>1.2.70</fastjson.version>
+        <fastjson.version>1.2.74</fastjson.version>
         <org.elasticsearch.version>7.3.2</org.elasticsearch.version>
         <redisson-starter.version>3.11.5</redisson-starter.version>
         <hutool.version>5.1.4</hutool.version>
+        <guava.version>30.0-jre</guava.version>
     </properties>
 
 
@@ -109,8 +110,18 @@
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
 
 
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${spring-boot-dependencies.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
