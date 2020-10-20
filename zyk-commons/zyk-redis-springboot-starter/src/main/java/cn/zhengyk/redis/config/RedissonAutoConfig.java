@@ -1,4 +1,4 @@
-package cn.zhengyk.redis;
+package cn.zhengyk.redis.config;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;

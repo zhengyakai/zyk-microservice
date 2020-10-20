@@ -1,4 +1,4 @@
-package cn.zhengyk.redis;
+package cn.zhengyk.redis.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,8 +15,8 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 /**
  * redis 配置类
  */
-@EnableConfigurationProperties(RedisProperties.class)
 @EnableCaching
+@EnableConfigurationProperties(RedisProperties.class)
 public class RedisTemplateAutoConfig {
 
     @Autowired

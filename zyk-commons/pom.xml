@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>zyk-redis-springboot-starter</module>
+        <module>zyk-es-springboot-starter</module>
     </modules>
 
 

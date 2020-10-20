@@ -1,0 +1,30 @@
+{
+  "groups": [
+    {
+      "name": "elasticsearch",
+      "type": "cn.zhengyk.es.properties.ElasticSearchProperties",
+      "sourceType": "cn.zhengyk.es.properties.ElasticSearchProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "elasticsearch.host-list",
+      "type": "java.lang.String",
+      "description": "es 地址 示例：192.168.1.1:9200,192.168.1.2:9200,192.168.1.3:9200",
+      "sourceType": "cn.zhengyk.es.properties.ElasticSearchProperties"
+    },
+    {
+      "name": "elasticsearch.password",
+      "type": "java.lang.String",
+      "description": "es 密码",
+      "sourceType": "cn.zhengyk.es.properties.ElasticSearchProperties"
+    },
+    {
+      "name": "elasticsearch.username",
+      "type": "java.lang.String",
+      "description": "es 用户名",
+      "sourceType": "cn.zhengyk.es.properties.ElasticSearchProperties"
+    }
+  ],
+  "hints": []
+}

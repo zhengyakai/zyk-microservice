@@ -1,5 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.zhengyk.redis.RedissonAutoConfig,\
-cn.zhengyk.redis.RedisTemplateAutoConfig,\
+cn.zhengyk.redis.config.RedissonAutoConfig,\
+cn.zhengyk.redis.config.RedisTemplateAutoConfig,\
 cn.zhengyk.redis.lock.RedissonDistributedLock,\
 cn.zhengyk.redis.lock.LockAspect
