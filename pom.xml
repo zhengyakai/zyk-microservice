@@ -15,6 +15,7 @@
         <module>demo</module>
         <module>zyk-commons</module>
         <module>zyk-platform</module>
+        <module>zyk-file-center</module>
     </modules>
 
     <properties>
@@ -37,6 +38,7 @@
         <redisson-starter.version>3.11.5</redisson-starter.version>
         <hutool.version>5.1.4</hutool.version>
         <guava.version>30.0-jre</guava.version>
+        <easyexcel.version>2.2.6</easyexcel.version>
     </properties>
 
 
@@ -87,6 +89,13 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+
+            <!-- easy-excel  -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${easyexcel.version}</version>
             </dependency>
 
 
