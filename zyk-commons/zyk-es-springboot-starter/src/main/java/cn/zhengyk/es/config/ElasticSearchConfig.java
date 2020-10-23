@@ -1,6 +1,7 @@
 package cn.zhengyk.es.config;
 
 import cn.zhengyk.es.properties.ElasticSearchProperties;
+import cn.zhengyk.es.properties.RestPoolProperties;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -20,11 +21,14 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConditionalOnProperty(prefix = "elasticsearch", name = "isOpen", havingValue = "true")
-@EnableConfigurationProperties(ElasticSearchProperties.class)
+@EnableConfigurationProperties({ElasticSearchProperties.class, RestPoolProperties.class})
 public class ElasticSearchConfig {
 
     @Autowired
     private ElasticSearchProperties esProperties;
+
+    @Autowired
+    private RestPoolProperties restPoolProperties;
 
     @Bean
     public RestHighLevelClient restHighLevelClient() {
@@ -33,10 +37,29 @@ public class ElasticSearchConfig {
         // 创建RestHighLevelClient客户端
         CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(esProperties.getUsername(), esProperties.getPassword()));
-        RestClientBuilder builder = RestClient.builder(httpHostArray)
-                .setHttpClientConfigCallback(httpClientBuilder -> httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider));
+        RestClientBuilder builder = RestClient.builder(httpHostArray);
+
+        //设置请求超时时间
+        builder.setRequestConfigCallback(requestConfigBuilder -> {
+            requestConfigBuilder.setConnectTimeout(restPoolProperties.getConnectTimeOut());
+            requestConfigBuilder.setSocketTimeout(restPoolProperties.getSocketTimeOut());
+            requestConfigBuilder.setConnectionRequestTimeout(restPoolProperties.getConnectionRequestTimeOut());
+            return requestConfigBuilder;
+        });
+
+        // 连接 认证
+        builder.setHttpClientConfigCallback(httpClientBuilder -> {
+            httpClientBuilder.setMaxConnTotal(restPoolProperties.getMaxConnTotal());
+            httpClientBuilder.setMaxConnPerRoute(restPoolProperties.getMaxConnPerRoute());
+            httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
+            return httpClientBuilder;
+        });
         return new RestHighLevelClient(builder);
     }
+
+
+
+
 
 
     private HttpHost[] getHttpHosts() {

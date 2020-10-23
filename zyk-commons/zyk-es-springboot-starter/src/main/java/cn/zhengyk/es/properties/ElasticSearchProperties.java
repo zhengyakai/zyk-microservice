@@ -1,13 +1,16 @@
 package cn.zhengyk.es.properties;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * @author yakai.zheng
  */
-@Data
+@Getter
+@Setter
 @ConfigurationProperties(prefix = "elasticsearch")
 public class ElasticSearchProperties {
 
@@ -25,4 +28,6 @@ public class ElasticSearchProperties {
      * es 密码
      */
     private String password;
+
+
 }
