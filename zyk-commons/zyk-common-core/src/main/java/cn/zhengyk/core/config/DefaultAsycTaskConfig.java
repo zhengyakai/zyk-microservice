@@ -36,7 +36,7 @@ public class DefaultAsycTaskConfig {
     /**
      *  线程池前缀
      */
-    @Value("${async.threadNamePrefix}")
+    @Value("${async.threadNamePrefix:default-asyncTaskExecutor}")
     private String threadNamePrefix;
 
     @Bean("asyncTaskExecutor")

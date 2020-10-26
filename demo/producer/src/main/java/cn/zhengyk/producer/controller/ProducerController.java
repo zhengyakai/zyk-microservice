@@ -2,7 +2,7 @@ package cn.zhengyk.producer.controller;
 
 import cn.zhengyk.api.DemoFeignClient;
 import cn.zhengyk.producer.beans.Person;
-import cn.zhengyk.redis.lock.Lock;
+import cn.zhengyk.redis.lock.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.redisson.api.RLock;
@@ -67,6 +67,13 @@ public class ProducerController implements DemoFeignClient{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        return "test1";
+    }
+
+
+    @GetMapping("test5")
+    public String test5(Person person) {
+        int a = 1/0;
         return "test1";
     }
 
