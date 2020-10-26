@@ -1,0 +1,51 @@
+{
+  "groups": [
+    {
+      "name": "swagger",
+      "type": "cn.zhengyk.swagger.properties.SwaggerProperties",
+      "sourceType": "cn.zhengyk.swagger.properties.SwaggerProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "swagger.application-description",
+      "type": "java.lang.String",
+      "description": "描述",
+      "sourceType": "cn.zhengyk.swagger.properties.SwaggerProperties",
+      "defaultValue": ""
+    },
+    {
+      "name": "swagger.application-name",
+      "type": "java.lang.String",
+      "description": "项目应用名",
+      "sourceType": "cn.zhengyk.swagger.properties.SwaggerProperties"
+    },
+    {
+      "name": "swagger.application-version",
+      "type": "java.lang.String",
+      "description": "版本",
+      "sourceType": "cn.zhengyk.swagger.properties.SwaggerProperties",
+      "defaultValue": ""
+    },
+    {
+      "name": "swagger.base-package",
+      "type": "java.lang.String",
+      "description": "swagger会解析的包路径",
+      "sourceType": "cn.zhengyk.swagger.properties.SwaggerProperties",
+      "defaultValue": ""
+    },
+    {
+      "name": "swagger.enable",
+      "type": "java.lang.Boolean",
+      "description": "是否开启swagger",
+      "sourceType": "cn.zhengyk.swagger.properties.SwaggerProperties"
+    },
+    {
+      "name": "swagger.try-host",
+      "type": "java.lang.String",
+      "description": "接口调试地址",
+      "sourceType": "cn.zhengyk.swagger.properties.SwaggerProperties"
+    }
+  ],
+  "hints": []
+}

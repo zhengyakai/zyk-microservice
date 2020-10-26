@@ -54,7 +54,7 @@ public class LockAspect {
             Object[] args = point.getArgs();
             lockKey = this.getValBySpel(lockKey, methodSignature, args);
             if (lockKey == null) {
-                throw new LockException("错误的 SpEL 表达式");
+                throw new LockException("根据SpEL表达式，未获取到 key");
             }
         }
 

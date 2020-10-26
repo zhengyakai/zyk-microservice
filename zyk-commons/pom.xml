@@ -12,8 +12,9 @@
     <artifactId>zyk-commons</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>zyk-redis-springboot-starter</module>
-        <module>zyk-es-springboot-starter</module>
+        <module>zyk-redis-spring-boot-starter</module>
+        <module>zyk-es-spring-boot-starter</module>
+        <module>zyk-swagger-spring-boot-starter</module>
     </modules>
 
 

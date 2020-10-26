@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>cn.zhengyk</groupId>
-            <artifactId>zyk-redis-springboot-starter</artifactId>
+            <artifactId>zyk-redis-spring-boot-starter</artifactId>
             <version>0.0.1</version>
         </dependency>
         <dependency>
@@ -28,8 +28,13 @@
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>cn.zhengyk</groupId>-->
-<!--            <artifactId>zyk-es-springboot-starter</artifactId>-->
+<!--            <artifactId>zyk-es-spring-boot-starter</artifactId>-->
 <!--            <version>0.0.1</version>-->
 <!--        </dependency>-->
+        <dependency>
+            <groupId>cn.zhengyk</groupId>
+            <artifactId>zyk-swagger-spring-boot-starter</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
 </project>

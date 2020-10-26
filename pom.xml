@@ -31,6 +31,8 @@
         <spring-cloud-starter-openfeign.version>2.2.4.RELEASE</spring-cloud-starter-openfeign.version>
         <spring-cloud-starter-security.version>2.2.4.RELEASE</spring-cloud-starter-security.version>
         <spring-cloud-starter-oauth2.version>2.2.4.RELEASE</spring-cloud-starter-oauth2.version>
+        <springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
+
 
         <mybatis-spring-boot.version>2.1.3</mybatis-spring-boot.version>
         <mysql-connector-java.version>8.0.21</mysql-connector-java.version>
@@ -74,8 +76,6 @@
                 <artifactId>redisson-spring-boot-starter</artifactId>
                 <version>${redisson-starter.version}</version>
             </dependency>
-            <!-- swagger -->
-
 
             <dependency>
                 <groupId>org.elasticsearch</groupId>
@@ -140,6 +140,12 @@
                 <version>${spring-cloud-starter-oauth2.version}</version>
             </dependency>
 
+            <!-- swagger -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${springfox-boot-starter.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
