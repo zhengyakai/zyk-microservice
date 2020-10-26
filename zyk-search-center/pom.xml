@@ -9,14 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>zyk-file-center</artifactId>
-    <description>文件上传下载中心</description>
+    <artifactId>zyk-search-center</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>zyk-search-client</module>
+        <module>zyk-search-server</module>
+    </modules>
 
 
-    <dependencies>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>easyexcel</artifactId>
-        </dependency>
-    </dependencies>
 </project>

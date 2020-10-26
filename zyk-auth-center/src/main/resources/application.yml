@@ -1,0 +1,21 @@
+server:
+  port: 9527
+  servlet:
+    context-path: /auth
+spring:
+  application:
+    name: auth-center
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.1.100/oauth2?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false&useSSL=false
+    username: root
+    password: Yakai2020@
+
+
+encrypt:
+  key-store:
+    location: classpath:/my.keystore
+    secret: mykeystore
+    alias: mykey
+    password: zhengyk
