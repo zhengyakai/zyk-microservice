@@ -15,6 +15,8 @@
         <module>zyk-redis-spring-boot-starter</module>
         <module>zyk-es-spring-boot-starter</module>
         <module>zyk-swagger-spring-boot-starter</module>
+        <module>zyk-exception-spring-boot-starter</module>
+        <module>zyk-common-core</module>
     </modules>
 
 

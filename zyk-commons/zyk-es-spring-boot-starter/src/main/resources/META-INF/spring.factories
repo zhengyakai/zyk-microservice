@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.zhengyk.es.config.ElasticSearchConfig
+cn.zhengyk.es.config.ElasticSearchAutoConfig

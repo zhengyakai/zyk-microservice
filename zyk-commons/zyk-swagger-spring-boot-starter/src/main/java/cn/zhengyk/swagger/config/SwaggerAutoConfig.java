@@ -28,13 +28,13 @@ import java.util.*;
  */
 @EnableOpenApi
 @EnableConfigurationProperties(SwaggerProperties.class)
-public class SwaggerConfiguration implements WebMvcConfigurer {
+public class SwaggerAutoConfig implements WebMvcConfigurer {
 
     private static final String AUTH_KEY = "Authorization";
 
     private final SwaggerProperties swaggerProperties;
 
-    public SwaggerConfiguration(SwaggerProperties swaggerProperties) {
+    public SwaggerAutoConfig(SwaggerProperties swaggerProperties) {
         this.swaggerProperties = swaggerProperties;
     }
 
