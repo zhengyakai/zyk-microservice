@@ -40,7 +40,7 @@ public class R<T> implements Serializable {
     }
 
     public static <T> R<T> ok() {
-        return new R<>(OK, null, null);
+        return of(OK, null, null);
     }
 
     public static <T> R<T> of(int code, String msg, T data) {

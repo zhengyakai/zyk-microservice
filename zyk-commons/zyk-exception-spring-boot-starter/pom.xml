@@ -12,6 +12,14 @@
     <artifactId>zyk-exception-spring-boot-starter</artifactId>
 
     <dependencies>
+
+        <dependency>
+            <groupId>cn.zhengyk</groupId>
+            <artifactId>zyk-common-core</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -29,5 +37,10 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

@@ -17,18 +17,8 @@ public class ExceptionEmailProperties {
     private boolean enable;
 
     /**
-     * 发件人邮箱
-     */
-    private String from;
-
-    /**
-     * 密码
-     */
-    private String password;
-
-    /**
      * 邮件接收者列表,多个以 “,” 分隔
      */
-    private String to;
+    private String tos;
 
 }

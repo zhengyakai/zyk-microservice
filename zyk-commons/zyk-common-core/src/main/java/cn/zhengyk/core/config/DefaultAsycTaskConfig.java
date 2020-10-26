@@ -21,25 +21,25 @@ public class DefaultAsycTaskConfig {
     /**
      *  线程池维护线程的最小数量.
      */
-    @Value("${asyc-task.corePoolSize:10}")
+    @Value("${async.corePoolSize:10}")
     private int corePoolSize;
     /**
      *  线程池维护线程的最大数量
      */
-    @Value("${asyc-task.maxPoolSize:200}")
+    @Value("${async.maxPoolSize:100}")
     private int maxPoolSize;
     /**
      *  队列最大长度
      */
-    @Value("${asyc-task.queueCapacity:10}")
+    @Value("${async.queueCapacity:100}")
     private int queueCapacity;
     /**
      *  线程池前缀
      */
-    @Value("${asyc-task.threadNamePrefix:ZltExecutor-}")
+    @Value("${async.threadNamePrefix}")
     private String threadNamePrefix;
 
-    @Bean
+    @Bean("asyncTaskExecutor")
     public TaskExecutor taskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(corePoolSize);
@@ -51,6 +51,8 @@ public class DefaultAsycTaskConfig {
            CALLER_RUNS：不在新线程中执行任务，而是有调用者所在的线程来执行
         */
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+        // 等待所有任务结束后再关闭线程池
+        executor.setWaitForTasksToCompleteOnShutdown(true);
         executor.initialize();
         return executor;
     }

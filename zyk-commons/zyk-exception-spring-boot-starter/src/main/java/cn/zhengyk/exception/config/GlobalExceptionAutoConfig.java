@@ -1,6 +1,6 @@
 package cn.zhengyk.exception.config;
 
-import cn.zhengyk.exception.properties.ExceptionEmailProperties;
+import cn.zhengyk.exception.properties.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
