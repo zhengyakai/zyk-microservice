@@ -3,17 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>zyk-microservice</artifactId>
+        <artifactId>zyk-platform</artifactId>
         <groupId>cn.zhengyk</groupId>
         <version>0.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>zyk-platform</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>zyk-registration</module>
-    </modules>
+    <artifactId>zyk-registration</artifactId>
 
 
 </project>
