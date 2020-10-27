@@ -18,6 +18,7 @@
         <module>zyk-file-center</module>
         <module>zyk-search-center</module>
         <module>zyk-auth-center</module>
+        <module>zyk-mail-center</module>
     </modules>
 
     <properties>
