@@ -2,6 +2,7 @@ package cn.zhengyk.mail.service.impl;
 
 import cn.zhengyk.mail.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -18,12 +19,15 @@ public class MailServiceImpl implements MailService {
     @Autowired
     private JavaMailSender mailSender;
 
+    @Value("${spring.mail.username}")
+    private String from;
+
 
 
     @Override
     public void sendExceptionEmail() {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("yakai512@163.com");
+        message.setFrom(from);
         message.setTo("1508379854@qq.com");
         message.setSubject("你好");
         message.setText("今天天气不错");

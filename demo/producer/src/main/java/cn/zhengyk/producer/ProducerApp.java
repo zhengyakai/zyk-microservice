@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @Date 2020/10/15 17:15
  */
 @EnableFeignClients("cn.zhengyk")
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 @SpringBootApplication
 @ComponentScan("cn.zhengyk")
 public class ProducerApp {

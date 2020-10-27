@@ -1,11 +1,10 @@
 package cn.zhengyk.exception.handler;
 
 import cn.zhengyk.core.beans.R;
-import cn.zhengyk.exception.service.MailService;
+import cn.zhengyk.mail.api.MailFeignClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.util.StringUtils;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,7 +21,7 @@ public class GlobalExceptionHandler {
 
 
     @Autowired
-    private MailService mailService;
+    private MailFeignClient mailFeignClient;
 
     @Value("${spring.profiles.active:dev}")
     private String activeProfiles;
@@ -34,7 +33,7 @@ public class GlobalExceptionHandler {
 
         if (!(ex instanceof HttpRequestMethodNotSupportedException)) {
             // 发送邮件 TODO
-            mailService.sendEmail();
+            mailFeignClient.sendExceptionEmail();
         }
         log.error(exceptionMsg);
         return R.error(msg);
