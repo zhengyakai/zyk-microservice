@@ -1,3 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.zhengyk.exception.config.GlobalExceptionAutoConfig,\
 cn.zhengyk.exception.pool.AsyncTaskExecutorConfig

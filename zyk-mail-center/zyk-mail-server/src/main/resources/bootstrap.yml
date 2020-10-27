@@ -1,0 +1,12 @@
+server:
+  port: 8003
+spring:
+  application:
+    name: zyk-mail
+  cloud:
+    nacos:
+      discovery:
+        namespace: zyk-microservice
+      config:
+        file-extension: yml
+        namespace: zyk-microservice

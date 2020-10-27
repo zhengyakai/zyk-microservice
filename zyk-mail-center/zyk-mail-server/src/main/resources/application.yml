@@ -1,6 +1,8 @@
 server:
   port: 8003
 spring:
+  profiles:
+    active: dev
   mail:
     #smtp服务主机  qq邮箱则为smtp.qq.com
     host: smtp.163.com
@@ -20,11 +22,7 @@ spring:
           starttls:
             enable: true
             required: true
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
-        namespace: dev
-  application:
-    name: zyk-mail
+exception-mail:
+  to: aaa@163.com
+
 
