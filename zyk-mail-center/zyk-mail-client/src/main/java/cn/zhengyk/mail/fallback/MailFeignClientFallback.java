@@ -1,5 +1,6 @@
 package cn.zhengyk.mail.fallback;
 
+import cn.zhengyk.core.beans.R;
 import cn.zhengyk.core.constants.ApplicationNameConstants;
 import cn.zhengyk.core.utils.LogUtil;
 import cn.zhengyk.mail.api.MailFeignClient;
@@ -19,8 +20,9 @@ public class MailFeignClientFallback implements FallbackFactory<MailFeignClient>
     public MailFeignClient create(Throwable throwable) {
         return new MailFeignClient() {
             @Override
-            public void sendExceptionEmail() {
+            public R<?> sendExceptionEmail(String subject, String content) {
                 LogUtil.logError(ApplicationNameConstants.MAIL, Thread.currentThread().getStackTrace()[1], throwable);
+                return R.fallback();
             }
         };
 

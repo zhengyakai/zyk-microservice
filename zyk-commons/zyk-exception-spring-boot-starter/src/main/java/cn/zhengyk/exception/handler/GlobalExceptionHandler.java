@@ -1,7 +1,7 @@
 package cn.zhengyk.exception.handler;
 
 import cn.zhengyk.core.beans.R;
-import cn.zhengyk.mail.api.MailFeignClient;
+import cn.zhengyk.exception.service.SendExceptionMailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
 
 
     @Autowired
-    private MailFeignClient mailFeignClient;
+    private SendExceptionMailService sendExceptionMailService;
 
     @Value("${spring.profiles.active:dev}")
     private String activeProfiles;
@@ -32,8 +32,7 @@ public class GlobalExceptionHandler {
         String exceptionMsg = this.getTrace(ex);
 
         if (!(ex instanceof HttpRequestMethodNotSupportedException)) {
-            // 发送邮件 TODO
-            mailFeignClient.sendExceptionEmail();
+            sendExceptionMailService.sendExceptionEmail(activeProfiles +"环境发生异常", exceptionMsg);
         }
         log.error(exceptionMsg);
         return R.error(msg);

@@ -8,5 +8,5 @@ package cn.zhengyk.mail.service;
  */
 public interface MailService {
 
-    void sendExceptionEmail();
+    void sendExceptionEmail(String subject, String content);
 }

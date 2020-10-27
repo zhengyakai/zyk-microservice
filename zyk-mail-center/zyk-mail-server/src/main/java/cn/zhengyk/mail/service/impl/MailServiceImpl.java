@@ -25,13 +25,12 @@ public class MailServiceImpl implements MailService {
 
 
     @Override
-    public void sendExceptionEmail() {
+    public void sendExceptionEmail(String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo("1508379854@qq.com");
-        message.setSubject("你好");
-        message.setText("今天天气不错");
-
+        message.setSubject(subject);
+        message.setText(content);
         mailSender.send(message);
 
     }
