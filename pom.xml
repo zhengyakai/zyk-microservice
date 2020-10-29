@@ -46,6 +46,7 @@
         <hutool.version>5.1.4</hutool.version>
         <guava.version>30.0-jre</guava.version>
         <easyexcel.version>2.2.6</easyexcel.version>
+        <paho.mqttv3.version>1.2.5</paho.mqttv3.version>
     </properties>
 
 
@@ -70,6 +71,13 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>org.eclipse.paho</groupId>
+                <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+                <version>${paho.mqttv3.version}</version>
+            </dependency>
+
 
             <!-- 在Redis基础上的一个Java实用工具包 -->
             <dependency>
