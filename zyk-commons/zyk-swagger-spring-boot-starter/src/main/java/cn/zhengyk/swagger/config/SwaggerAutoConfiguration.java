@@ -3,6 +3,7 @@ package cn.zhengyk.swagger.config;
 import cn.zhengyk.swagger.properties.SwaggerProperties;
 import io.swagger.models.auth.In;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -32,11 +33,9 @@ public class SwaggerAutoConfiguration implements WebMvcConfigurer {
 
     private static final String AUTH_KEY = "Authorization";
 
-    private final SwaggerProperties swaggerProperties;
+    @Autowired
+    private SwaggerProperties swaggerProperties;
 
-    public SwaggerAutoConfiguration(SwaggerProperties swaggerProperties) {
-        this.swaggerProperties = swaggerProperties;
-    }
 
     @Bean
     public Docket createRestApi() {

@@ -16,7 +16,6 @@ import org.springframework.data.redis.serializer.RedisSerializer;
  * redis 配置类
  */
 @EnableCaching
-@EnableConfigurationProperties(RedisProperties.class)
 public class RedisTemplateAutoConfig {
 
     @Autowired
