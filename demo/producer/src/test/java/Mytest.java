@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +22,13 @@ public class Mytest {
         List<String> collect = list.stream().map(s -> s = "0" + s).collect(Collectors.toList());
         System.out.println(collect);
 
+
+    }
+
+    @Test
+    public void test2() throws URISyntaxException {
+        URI uri = new URI("localhost:8080");
+        System.out.println(uri.toString());
 
     }
 }

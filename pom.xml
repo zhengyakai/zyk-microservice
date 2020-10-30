@@ -47,6 +47,7 @@
         <guava.version>30.0-jre</guava.version>
         <easyexcel.version>2.2.6</easyexcel.version>
         <paho.mqttv3.version>1.2.5</paho.mqttv3.version>
+        <ip2region.version>1.7.2</ip2region.version>
     </properties>
 
 
@@ -71,6 +72,12 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>org.lionsoul</groupId>
+                <artifactId>ip2region</artifactId>
+                <version>${ip2region.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.eclipse.paho</groupId>
