@@ -44,7 +44,7 @@ public class MqttTemplate implements DisposableBean {
     public void asyncPublish(String topic, Object message) throws MqttException {
         byte[] payload = new byte[0];
         try {
-            waitIfNotConnected();
+            //waitIfNotConnected()
             payload = JsonUtil.writeValueAsBytes(message);
         } catch (Exception e) {
             throw new MqttException(e);
@@ -54,7 +54,7 @@ public class MqttTemplate implements DisposableBean {
 
     public void asyncPublish(String topic, MqttMessage mqttMessage) throws MqttException {
         try {
-            waitIfNotConnected();
+            //waitIfNotConnected()
         } catch (Exception e) {
             throw new MqttException(e);
         }
@@ -63,7 +63,7 @@ public class MqttTemplate implements DisposableBean {
 
     public void asyncPublish(String topic, Object message, Object userContext, IMqttActionListener callback) throws MqttException {
         try {
-            waitIfNotConnected();
+            //waitIfNotConnected()
             byte[] payload = JsonUtil.writeValueAsBytes(message);
             this.mqttAsyncClient.publish(prependEnv(topic), new MqttMessage(payload), userContext, callback);
         } catch (Exception e) {
@@ -73,7 +73,7 @@ public class MqttTemplate implements DisposableBean {
 
     public void asyncPublish(String topic, MqttMessage mqttMessage, Object userContext, IMqttActionListener callback) throws MqttException {
         try {
-            waitIfNotConnected();
+            //waitIfNotConnected()
         } catch (Exception e) {
             throw new MqttException(e);
         }
@@ -83,7 +83,7 @@ public class MqttTemplate implements DisposableBean {
     public void asyncPublish(String topic, Object message, int qos, boolean retained) throws MqttException {
         byte[] payload = new byte[0];
         try {
-            waitIfNotConnected();
+            //waitIfNotConnected()
             payload = JsonUtil.writeValueAsBytes(message);
         } catch (Exception e) {
             throw new MqttException(e);
@@ -93,7 +93,7 @@ public class MqttTemplate implements DisposableBean {
 
     public void asyncPublish(String topic, byte[] payload, int qos, boolean retained) throws MqttException {
         try {
-            waitIfNotConnected();
+            //waitIfNotConnected()
         } catch (Exception e) {
             throw new MqttException(e);
         }
@@ -103,7 +103,7 @@ public class MqttTemplate implements DisposableBean {
     public void asyncPublish(String topic, Object message, int qos, boolean retained, Object userContext, IMqttActionListener callback) throws MqttException {
         byte[] payload = new byte[0];
         try {
-            waitIfNotConnected();
+            //waitIfNotConnected()
             payload = JsonUtil.writeValueAsBytes(message);
         } catch (Exception e) {
             throw new MqttException(e);
@@ -113,7 +113,7 @@ public class MqttTemplate implements DisposableBean {
 
     public void asyncPublish(String topic, byte[] payload, int qos, boolean retained, Object userContext, IMqttActionListener callback) throws MqttException {
         try {
-            waitIfNotConnected();
+            //waitIfNotConnected()
         } catch (Exception e) {
             throw new MqttException(e);
         }
@@ -122,7 +122,7 @@ public class MqttTemplate implements DisposableBean {
 
     public IMqttToken subscribe(String topic, int qos, IMqttMessageListener messageListener) throws MqttException {
         try {
-            waitIfNotConnected();
+            //waitIfNotConnected()
         } catch (Exception e) {
             throw new MqttException(e);
         }
@@ -134,11 +134,11 @@ public class MqttTemplate implements DisposableBean {
     }
 
 
-    private void waitIfNotConnected() throws InterruptedException {
-        while (!this.mqttAsyncClient.isConnected()) {
-            Thread.sleep(200);
-        }
-    }
+//    private void waitIfNotConnected() throws InterruptedException {
+//        while (!this.mqttAsyncClient.isConnected()) {
+//            Thread.sleep(200);
+//        }
+//    }
 
 
     @Override

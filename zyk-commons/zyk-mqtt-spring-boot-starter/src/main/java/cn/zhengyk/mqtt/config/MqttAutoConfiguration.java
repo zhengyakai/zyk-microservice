@@ -5,6 +5,8 @@ import cn.zhengyk.mqtt.factory.MqttClientFactory;
 import cn.zhengyk.mqtt.factory.support.DefaultMqttClientFactory;
 import cn.zhengyk.mqtt.properties.MqttProperties;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.paho.client.mqttv3.IMqttAsyncClient;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttClientPersistence;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
@@ -53,11 +55,17 @@ public class MqttAutoConfiguration {
     @Autowired
     @ConditionalOnBean(MqttClientFactory.class)
     @ConditionalOnMissingBean(MqttTemplate.class)
-    public MqttTemplate mqttTemplate(MqttClientFactory mqttClientFactory) throws MqttException {
+    public MqttTemplate mqttTemplate(MqttClientFactory mqttClientFactory) throws Exception {
         MqttTemplate mqttTemplate = new MqttTemplate();
         mqttTemplate.setEnv(env);
         mqttTemplate.setMqttClientFactory(mqttClientFactory);
-        mqttTemplate.setMqttAsyncClient(mqttClientFactory.createMqttAsyncClient(mqttProperties.getClientId()));
+        IMqttAsyncClient mqttAsyncClient = mqttClientFactory.createMqttAsyncClient(mqttProperties.getClientId());
+        mqttAsyncClient.connect();
+        while (!mqttAsyncClient.isConnected()) {
+            Thread.sleep(500);
+        }
+        log.info("连接 mqtt 服务器成功");
+        mqttTemplate.setMqttAsyncClient(mqttAsyncClient);
         return mqttTemplate;
     }
 
