@@ -1,9 +1,7 @@
 package cn.zhengyk.mqtt.properties;
 
-import cn.zhengyk.core.utils.IpUtil;
 import lombok.Getter;
 import lombok.Setter;
-import org.eclipse.paho.client.mqttv3.MqttException;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -23,37 +21,28 @@ public class MqttProperties {
 
     private boolean enable = true;
     /**
-     * mqtt服务器集群地址 示例: 192.168.1.100:1883,192.168.1.101:1883
+     * mqtt服务器集群地址数组 示例: 192.168.1.100:1883
      */
-    private String urls = "127.0.0.1:1883";
+    private String[] serverUris;
 
-    private String clientId = IpUtil.getHostIp();
-
-    private String user =  "admin";
+    private String userName =  "admin";
 
     private String password = "public";
 
-
-
     private Integer connectTimeOut = 3000;
-    private Integer connectReTryMaxTimes = 5;
-    private Integer connectReTryInterval = 60;
-    private Integer keepAliveTime = 60000;
-
-    private boolean isReConnect = true;
-    private boolean autoConnectWhenStarted = true;
-    private boolean cleanSession=true;
+    private Integer keepAliveInterval = 10000;
+    private Boolean autoReconnect = true;
+    private Boolean cleanSession=true;
 
 
     /**
      * 简单的负载均衡  轮询
      */
     public String getOneUrl() {
-        if (urls == null || urls.split(",").length == 0) {
+        if (serverUris == null || serverUris.length == 0) {
             throw new RuntimeException("urls config error!");
         }
-        String[] urlArr = urls.split(",");
-        return  urlArr[count.incrementAndGet()%urlArr.length];
+        return  serverUris[count.incrementAndGet()%serverUris.length];
     }
 
 }

@@ -11,11 +11,7 @@ import org.eclipse.paho.client.mqttv3.MqttException;
  */
 public interface MqttClientFactory {
 
-    IMqttClient createMqttSyncClient(String clientId) throws MqttException;
-
-    IMqttClient createMqttSyncClient(String clientId, MqttClientPersistence persistence) throws MqttException;
 
     IMqttAsyncClient createMqttAsyncClient(String clientId) throws MqttException;
 
-    IMqttAsyncClient createMqttAsyncClient(String clientId, MqttClientPersistence persistence) throws MqttException;
 }
