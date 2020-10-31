@@ -37,7 +37,7 @@ public class MqttTemplate implements DisposableBean {
      * @param message 消息体
      **/
     public void asyncPublish(String topic, Object message) throws MqttException {
-        byte[] payload = new byte[0];
+        byte[] payload;
         try {
             payload = JsonUtil.writeValueAsBytes(message);
         } catch (Exception e) {

@@ -38,6 +38,9 @@ public class MqttAutoConfiguration {
     @Value("${spring.application.name}")
     private String appName;
 
+    @Value("${server.port}")
+    private String port;
+
 
     @Bean
     @ConditionalOnMissingBean
@@ -56,7 +59,7 @@ public class MqttAutoConfiguration {
     @ConditionalOnMissingBean
     public MqttConnectOptions mqttConnectOptions() {
         MqttConnectOptions options = new MqttConnectOptions();
-        options.setServerURIs(null);
+        options.setServerURIs(mqttProperties.getServerUris());
         options.setKeepAliveInterval(mqttProperties.getKeepAliveInterval());
         // 断开是否自动重联
         options.setAutomaticReconnect(mqttProperties.getAutoReconnect());
@@ -85,7 +88,7 @@ public class MqttAutoConfiguration {
         mqttTemplate.setEnv(env);
         mqttTemplate.setMqttClientFactory(mqttClientFactory);
 
-        String clientId = appName + "_" + IpUtil.getHostIp();
+        String clientId = appName + ":" + port + "_" + IpUtil.getHostIp();
         IMqttAsyncClient mqttAsyncClient = mqttClientFactory.createMqttAsyncClient(clientId);
         mqttAsyncClient.connect(options);
         while (!mqttAsyncClient.isConnected()) {

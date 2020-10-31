@@ -1,0 +1,8 @@
+server:
+  port: 7002
+spring:
+  application:
+    name: sub
+mqtt:
+  serverUris:
+    - tcp://192.168.1.11:1883
