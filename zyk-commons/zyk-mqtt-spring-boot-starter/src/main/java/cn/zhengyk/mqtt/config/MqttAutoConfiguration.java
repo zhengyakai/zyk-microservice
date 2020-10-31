@@ -6,8 +6,10 @@ import cn.zhengyk.mqtt.factory.support.DefaultMqttClientFactory;
 import cn.zhengyk.mqtt.properties.MqttProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.MqttClientPersistence;
+import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -30,6 +32,9 @@ public class MqttAutoConfiguration {
     @Autowired
     private MqttProperties mqttProperties;
 
+    @Value("${spring.profiles.active:dev}")
+    private String env;
+
 
     @Bean
     @ConditionalOnMissingBean
@@ -45,14 +50,14 @@ public class MqttAutoConfiguration {
     }
 
     @Bean(destroyMethod = "destroy")
+    @Autowired
     @ConditionalOnBean(MqttClientFactory.class)
     @ConditionalOnMissingBean(MqttTemplate.class)
-    public MqttTemplate mqttTemplate(MqttClientFactory mqttClientFactory) {
+    public MqttTemplate mqttTemplate(MqttClientFactory mqttClientFactory) throws MqttException {
         MqttTemplate mqttTemplate = new MqttTemplate();
-//        mqttTemplate.setMqttClientFactory(mqttClientFactory);
-//        log.info("{}", mqttProperties);
-//        mqttTemplate.setConnectOptions(mqttProperties.getConnectOptions());
-//        mqttTemplate.setObjectMapper(mqttObjectMapper);
+        mqttTemplate.setEnv(env);
+        mqttTemplate.setMqttClientFactory(mqttClientFactory);
+        mqttTemplate.setMqttAsyncClient(mqttClientFactory.createMqttAsyncClient(mqttProperties.getClientId()));
         return mqttTemplate;
     }
 

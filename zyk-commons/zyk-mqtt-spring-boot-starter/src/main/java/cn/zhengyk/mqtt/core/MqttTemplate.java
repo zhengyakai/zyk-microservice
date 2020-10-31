@@ -1,5 +1,6 @@
 package cn.zhengyk.mqtt.core;
 
+import cn.zhengyk.core.utils.JsonUtil;
 import cn.zhengyk.mqtt.factory.MqttClientFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
@@ -44,7 +45,7 @@ public class MqttTemplate implements DisposableBean {
         byte[] payload = new byte[0];
         try {
             waitIfNotConnected();
-            payload = objectMapper.writeValueAsBytes(message);
+            payload = JsonUtil.writeValueAsBytes(message);
         } catch (Exception e) {
             throw new MqttException(e);
         }
@@ -63,7 +64,7 @@ public class MqttTemplate implements DisposableBean {
     public void asyncPublish(String topic, Object message, Object userContext, IMqttActionListener callback) throws MqttException {
         try {
             waitIfNotConnected();
-            byte[] payload = objectMapper.writeValueAsBytes(message);
+            byte[] payload = JsonUtil.writeValueAsBytes(message);
             this.mqttAsyncClient.publish(prependEnv(topic), new MqttMessage(payload), userContext, callback);
         } catch (Exception e) {
             throw new MqttException(e);
@@ -83,7 +84,7 @@ public class MqttTemplate implements DisposableBean {
         byte[] payload = new byte[0];
         try {
             waitIfNotConnected();
-            payload = objectMapper.writeValueAsBytes(message);
+            payload = JsonUtil.writeValueAsBytes(message);
         } catch (Exception e) {
             throw new MqttException(e);
         }
@@ -103,7 +104,7 @@ public class MqttTemplate implements DisposableBean {
         byte[] payload = new byte[0];
         try {
             waitIfNotConnected();
-            payload = objectMapper.writeValueAsBytes(message);
+            payload = JsonUtil.writeValueAsBytes(message);
         } catch (Exception e) {
             throw new MqttException(e);
         }

@@ -1,5 +1,6 @@
 package cn.zhengyk.mqtt.properties;
 
+import cn.zhengyk.core.utils.IpUtil;
 import lombok.Getter;
 import lombok.Setter;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -18,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MqttProperties {
 
 
-    public static AtomicInteger count = new AtomicInteger(0);
+    public static AtomicInteger count = new AtomicInteger(3);
 
     private boolean enable = true;
     /**
@@ -26,7 +27,7 @@ public class MqttProperties {
      */
     private String urls = "127.0.0.1:1883";
 
-    private String clientId;
+    private String clientId = IpUtil.getHostIp();
 
     private String user =  "admin";
 

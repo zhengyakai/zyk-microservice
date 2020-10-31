@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
     private SendExceptionMailService sendExceptionMailService;
 
     @Value("${spring.profiles.active:dev}")
-    private String activeProfiles;
+    private String env;
 
     @ExceptionHandler(Exception.class)
     public R<?> exception(HttpServletRequest request, Exception ex) {
@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
         String exceptionMsg = this.getTrace(ex);
 
         if (!(ex instanceof HttpRequestMethodNotSupportedException)) {
-            sendExceptionMailService.sendExceptionEmail(activeProfiles +"环境发生异常", exceptionMsg);
+            sendExceptionMailService.sendExceptionEmail(env +"环境发生异常", exceptionMsg);
         }
         log.error(exceptionMsg);
         return R.error(msg);

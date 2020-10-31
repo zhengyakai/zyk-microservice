@@ -1,3 +1,4 @@
+import cn.zhengyk.core.utils.IpUtil;
 import org.junit.jupiter.api.Test;
 
 import java.net.URI;
@@ -29,6 +30,8 @@ public class Mytest {
     public void test2() throws URISyntaxException {
         URI uri = new URI("localhost:8080");
         System.out.println(uri.toString());
+
+        System.out.println(IpUtil.getHostIp());
 
     }
 }
