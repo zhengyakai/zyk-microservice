@@ -88,7 +88,7 @@ public class MqttAutoConfiguration {
         mqttTemplate.setEnv(env);
         mqttTemplate.setMqttClientFactory(mqttClientFactory);
 
-        String clientId = appName + ":" + port + "_" + IpUtil.getHostIp();
+        String clientId = appName + "_" + IpUtil.getHostIp() + ":" + port;
         IMqttAsyncClient mqttAsyncClient = mqttClientFactory.createMqttAsyncClient(clientId);
         mqttAsyncClient.connect(options);
         while (!mqttAsyncClient.isConnected()) {
