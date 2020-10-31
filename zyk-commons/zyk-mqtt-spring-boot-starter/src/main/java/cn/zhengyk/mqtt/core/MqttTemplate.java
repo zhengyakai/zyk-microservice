@@ -32,19 +32,13 @@ public class MqttTemplate implements DisposableBean {
 
     private IMqttAsyncClient mqttAsyncClient;
 
-
-    public IMqttAsyncClient createAsyncClient(String clientId) throws MqttException {
-        return mqttClientFactory.createMqttAsyncClient(clientId);
-    }
-
-    public IMqttClient createSyncClient(String clientId) throws MqttException {
-        return mqttClientFactory.createMqttSyncClient(clientId);
-    }
-
+    /**
+     * @param topic 主题
+     * @param message 消息体
+     **/
     public void asyncPublish(String topic, Object message) throws MqttException {
         byte[] payload = new byte[0];
         try {
-            //waitIfNotConnected()
             payload = JsonUtil.writeValueAsBytes(message);
         } catch (Exception e) {
             throw new MqttException(e);
@@ -52,38 +46,15 @@ public class MqttTemplate implements DisposableBean {
         this.mqttAsyncClient.publish(prependEnv(topic), new MqttMessage(payload));
     }
 
-    public void asyncPublish(String topic, MqttMessage mqttMessage) throws MqttException {
-        try {
-            //waitIfNotConnected()
-        } catch (Exception e) {
-            throw new MqttException(e);
-        }
-        this.mqttAsyncClient.publish(prependEnv(topic), mqttMessage);
-    }
-
-    public void asyncPublish(String topic, Object message, Object userContext, IMqttActionListener callback) throws MqttException {
-        try {
-            //waitIfNotConnected()
-            byte[] payload = JsonUtil.writeValueAsBytes(message);
-            this.mqttAsyncClient.publish(prependEnv(topic), new MqttMessage(payload), userContext, callback);
-        } catch (Exception e) {
-            throw new MqttException(e);
-        }
-    }
-
-    public void asyncPublish(String topic, MqttMessage mqttMessage, Object userContext, IMqttActionListener callback) throws MqttException {
-        try {
-            //waitIfNotConnected()
-        } catch (Exception e) {
-            throw new MqttException(e);
-        }
-        this.mqttAsyncClient.publish(prependEnv(topic), mqttMessage, userContext, callback);
-    }
-
+    /**
+     * @param topic 主题
+     * @param message 消息体
+     * @param qos 通信质量
+     * @param retained broker 是否保留消息
+     **/
     public void asyncPublish(String topic, Object message, int qos, boolean retained) throws MqttException {
-        byte[] payload = new byte[0];
+        byte[] payload;
         try {
-            //waitIfNotConnected()
             payload = JsonUtil.writeValueAsBytes(message);
         } catch (Exception e) {
             throw new MqttException(e);
@@ -92,40 +63,16 @@ public class MqttTemplate implements DisposableBean {
     }
 
     public void asyncPublish(String topic, byte[] payload, int qos, boolean retained) throws MqttException {
-        try {
-            //waitIfNotConnected()
-        } catch (Exception e) {
-            throw new MqttException(e);
-        }
         this.mqttAsyncClient.publish(prependEnv(topic), payload, qos, retained);
     }
 
-    public void asyncPublish(String topic, Object message, int qos, boolean retained, Object userContext, IMqttActionListener callback) throws MqttException {
-        byte[] payload = new byte[0];
-        try {
-            //waitIfNotConnected()
-            payload = JsonUtil.writeValueAsBytes(message);
-        } catch (Exception e) {
-            throw new MqttException(e);
-        }
-        this.mqttAsyncClient.publish(prependEnv(topic), payload, qos, retained, userContext, callback);
-    }
 
-    public void asyncPublish(String topic, byte[] payload, int qos, boolean retained, Object userContext, IMqttActionListener callback) throws MqttException {
-        try {
-            //waitIfNotConnected()
-        } catch (Exception e) {
-            throw new MqttException(e);
-        }
-        this.mqttAsyncClient.publish(prependEnv(topic), payload, qos, retained, userContext, callback);
-    }
-
+    /**
+     * @param topic 主题
+     * @param qos  通信质量
+     * @param messageListener 消息消费者
+     **/
     public IMqttToken subscribe(String topic, int qos, IMqttMessageListener messageListener) throws MqttException {
-        try {
-            //waitIfNotConnected()
-        } catch (Exception e) {
-            throw new MqttException(e);
-        }
         return this.mqttAsyncClient.subscribe(prependEnv(topic), qos, messageListener);
     }
 
@@ -133,12 +80,6 @@ public class MqttTemplate implements DisposableBean {
         return getEnv() + "/" + topic;
     }
 
-
-//    private void waitIfNotConnected() throws InterruptedException {
-//        while (!this.mqttAsyncClient.isConnected()) {
-//            Thread.sleep(200);
-//        }
-//    }
 
 
     @Override
