@@ -61,13 +61,9 @@ public class MqttAutoConfiguration {
         MqttConnectOptions options = new MqttConnectOptions();
         // getServerUris 会覆盖上面的 mqttProperties.getOneUrl()
         options.setServerURIs(mqttProperties.getServerUris());
-
         options.setKeepAliveInterval(mqttProperties.getKeepAliveInterval());
-        // 断开是否自动重联
         options.setAutomaticReconnect(mqttProperties.getAutoReconnect());
-
         options.setCleanSession(mqttProperties.getCleanSession());
-
         options.setConnectionTimeout(mqttProperties.getConnectTimeOut());
 
         String user = mqttProperties.getUserName();
@@ -96,7 +92,7 @@ public class MqttAutoConfiguration {
         while (!mqttAsyncClient.isConnected()) {
             Thread.sleep(500);
         }
-        log.info("连接 mqtt 服务器成功");
+        log.info("客户端{},连接 mqtt 服务器成功", clientId);
         mqttTemplate.setMqttAsyncClient(mqttAsyncClient);
         return mqttTemplate;
     }

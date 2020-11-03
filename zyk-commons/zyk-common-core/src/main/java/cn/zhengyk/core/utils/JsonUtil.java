@@ -126,7 +126,7 @@ public class JsonUtil {
         return list;
     }
 
-    public static final byte[] writeValueAsBytes(Object obj) throws JsonProcessingException {
+    public static byte[] writeValueAsBytes(Object obj) throws JsonProcessingException {
         return OBJECT_MAPPER.writeValueAsBytes(obj);
     }
 }
