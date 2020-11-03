@@ -50,9 +50,13 @@ public class MqttTemplate implements DisposableBean {
      * @param topic 主题
      * @param message 消息体
      * @param qos 通信质量
+     *            0-最多一次
+     *            1-至少一次
+     *            2-只有一次
      * @param retained broker 是否保留消息
      **/
     public void asyncPublish(String topic, Object message, int qos, boolean retained) throws MqttException {
+        this.checkQos(qos);
         byte[] payload;
         try {
             payload = JsonUtil.writeValueAsBytes(message);
@@ -63,6 +67,7 @@ public class MqttTemplate implements DisposableBean {
     }
 
     public void asyncPublish(String topic, byte[] payload, int qos, boolean retained) throws MqttException {
+        this.checkQos(qos);
         this.mqttAsyncClient.publish(prependEnv(topic), payload, qos, retained);
     }
 
@@ -73,6 +78,7 @@ public class MqttTemplate implements DisposableBean {
      * @param messageListener 消息消费者
      **/
     public IMqttToken subscribe(String topic, int qos, IMqttMessageListener messageListener) throws MqttException {
+        this.checkQos(qos);
         return this.mqttAsyncClient.subscribe(prependEnv(topic), qos, messageListener);
     }
 
@@ -80,10 +86,19 @@ public class MqttTemplate implements DisposableBean {
         return getEnv() + "/" + topic;
     }
 
+    private void checkQos(int qos) throws MqttException {
+        if (qos != 0 && qos != 1 && qos != 2) {
+            throw new MqttException(new Exception("mqtt 协议 qos 只能为 0、1、2"));
+        }
+    }
+
+
 
 
     @Override
     public void destroy() throws Exception {
         mqttAsyncClient.disconnect();
     }
+
+
 }
