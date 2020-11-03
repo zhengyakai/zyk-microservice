@@ -59,7 +59,9 @@ public class MqttAutoConfiguration {
     @ConditionalOnMissingBean
     public MqttConnectOptions mqttConnectOptions() {
         MqttConnectOptions options = new MqttConnectOptions();
+        // getServerUris 会覆盖上面的 mqttProperties.getOneUrl()
         options.setServerURIs(mqttProperties.getServerUris());
+
         options.setKeepAliveInterval(mqttProperties.getKeepAliveInterval());
         // 断开是否自动重联
         options.setAutomaticReconnect(mqttProperties.getAutoReconnect());

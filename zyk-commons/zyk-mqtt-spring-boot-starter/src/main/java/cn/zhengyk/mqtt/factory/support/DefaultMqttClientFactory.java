@@ -13,11 +13,9 @@ import java.net.URISyntaxException;
  */
 public class DefaultMqttClientFactory implements MqttClientFactory {
 
-    private MqttClientPersistence persistence;
+    private final MqttClientPersistence persistence;
 
-    private MqttConnectOptions options;
-
-    private String serverUri;
+    private final String serverUri;
 
     public DefaultMqttClientFactory(String serverUri, MqttClientPersistence persistence) {
         this.serverUri = serverUri;

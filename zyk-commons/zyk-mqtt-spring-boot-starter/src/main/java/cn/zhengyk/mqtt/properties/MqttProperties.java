@@ -21,7 +21,9 @@ public class MqttProperties {
 
     private boolean enable = true;
     /**
-     * mqtt服务器集群地址数组 示例: 192.168.1.100:1883
+     * mqtt服务器集群地址数组 示例:
+     * -tcp://192.168.1.100:1883
+     * -tcp://192.168.1.101:1883
      */
     private String[] serverUris;
 
@@ -29,10 +31,25 @@ public class MqttProperties {
 
     private String password = "public";
 
+    /**
+     * 连接超时
+     */
     private Integer connectTimeOut = 3000;
-    private Integer keepAliveInterval = 10000;
+
+    /**
+     * 设置会话心跳时间 单位为秒 服务器会每隔(1.5*keepTime)秒的时间向客户端发送个消息判断客户端是否在线
+     */
+    private Integer keepAliveInterval = 5000;
+
+    /**
+     * 断开是否自动重联
+     */
     private Boolean autoReconnect = true;
-    private Boolean cleanSession=true;
+
+    /**
+     * 客户端每次连接是否清除 session， 为否表示是 重连时之前发的消息不会保存
+     */
+    private Boolean cleanSession = true;
 
 
     /**

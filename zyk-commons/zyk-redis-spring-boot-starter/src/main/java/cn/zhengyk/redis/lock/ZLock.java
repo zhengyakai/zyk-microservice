@@ -19,7 +19,7 @@ public class ZLock implements AutoCloseable{
 
     @Override
     public void close() {
-        if (rLock != null && rLock.isLocked()) {
+        if (rLock != null && this.locked()) {
             rLock.unlock();
         }
     }
