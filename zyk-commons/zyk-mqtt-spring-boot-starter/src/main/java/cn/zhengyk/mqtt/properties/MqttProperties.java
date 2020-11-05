@@ -51,6 +51,13 @@ public class MqttProperties {
      */
     private Boolean cleanSession = true;
 
+    /**
+     * 消息保存类型  memory、file
+     * 使用 file 的好处是 保证了数据肯定能够发送到服务器， 只要发送的数据包没有收到确认，
+     * 这个数据包就一直保存在文件当中，直到其发送出去为止
+     */
+    private String persistenceType = "memory";
+
 
     /**
      * 简单的负载均衡  轮询
