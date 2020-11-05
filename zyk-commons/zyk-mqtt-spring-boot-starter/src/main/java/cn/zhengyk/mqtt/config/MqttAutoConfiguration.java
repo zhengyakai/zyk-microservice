@@ -5,11 +5,10 @@ import cn.zhengyk.mqtt.core.MqttTemplate;
 import cn.zhengyk.mqtt.factory.MqttClientFactory;
 import cn.zhengyk.mqtt.factory.support.DefaultMqttClientFactory;
 import cn.zhengyk.mqtt.properties.MqttProperties;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.paho.client.mqttv3.IMqttAsyncClient;
-import org.eclipse.paho.client.mqttv3.MqttClientPersistence;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -76,9 +75,8 @@ public class MqttAutoConfiguration {
     }
 
 
-
-    @Bean(destroyMethod = "destroy")
     @Autowired
+    @Bean(destroyMethod = "destroy")
     @ConditionalOnBean(MqttClientFactory.class)
     @ConditionalOnMissingBean(MqttTemplate.class)
     public MqttTemplate mqttTemplate(MqttClientFactory mqttClientFactory, MqttConnectOptions options) throws Exception {
@@ -88,11 +86,19 @@ public class MqttAutoConfiguration {
 
         String clientId = appName + "_" + IpUtil.getHostIp() + ":" + port;
         IMqttAsyncClient mqttAsyncClient = mqttClientFactory.createMqttAsyncClient(clientId);
-        mqttAsyncClient.connect(options);
-        while (!mqttAsyncClient.isConnected()) {
-            Thread.sleep(500);
-        }
-        log.info("客户端{},连接 mqtt 服务器成功", clientId);
+        mqttAsyncClient.connect(options, new IMqttActionListener() {
+            @Override
+            public void onSuccess(IMqttToken asyncActionToken) {
+                log.info("客户端{},连接 mqtt 服务器成功", clientId);
+            }
+            @SneakyThrows
+            @Override
+            public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                log.error("客户端"+clientId+",连接 mqtt 服务器失败", exception);
+                throw exception;
+            }
+        });
+
         mqttTemplate.setMqttAsyncClient(mqttAsyncClient);
         return mqttTemplate;
     }

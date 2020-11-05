@@ -27,19 +27,19 @@ public class MqttProperties {
      */
     private String[] serverUris;
 
-    private String userName =  "admin";
+    private String userName =  "zhengyk";
 
-    private String password = "public";
+    private String password = "Yakai1991@";
 
     /**
      * 连接超时
      */
-    private Integer connectTimeOut = 3000;
+    private Integer connectTimeOut = 30;
 
     /**
      * 设置会话心跳时间 单位为秒 服务器会每隔(1.5*keepTime)秒的时间向客户端发送个消息判断客户端是否在线
      */
-    private Integer keepAliveInterval = 5000;
+    private Integer keepAliveInterval = 60;
 
     /**
      * 断开是否自动重联
