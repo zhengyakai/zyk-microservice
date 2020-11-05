@@ -2,8 +2,7 @@ package cn.zhengyk.mqtt;
 
 import cn.zhengyk.mqtt.core.MqttTemplate;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.IMqttAsyncClient;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,8 +23,13 @@ public class Sub implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        log.info("开始监听......");
-        String clientId = mqttTemplate.getMqttAsyncClient().getClientId();
+        IMqttAsyncClient mqttAsyncClient = mqttTemplate.getMqttAsyncClient();
+        String clientId = mqttAsyncClient.getClientId();
+        while (!mqttAsyncClient.isConnected()) {
+            log.info("开始连接mqtt服务器....");
+            Thread.sleep(500);
+        }
+        // 订阅主题
         mqttTemplate.subscribe("topic/test/a", 0, (topic, message) -> log.info("服务端:{}从topic:{},接收到消息:{}",clientId,topic, message));
     }
 }

@@ -86,7 +86,7 @@ public class MqttAutoConfiguration {
 
         String clientId = appName + "_" + IpUtil.getHostIp() + ":" + port;
         IMqttAsyncClient mqttAsyncClient = mqttClientFactory.createMqttAsyncClient(clientId);
-        mqttAsyncClient.connect(options, new IMqttActionListener() {
+        mqttAsyncClient.connect(options, null, new IMqttActionListener() {
             @Override
             public void onSuccess(IMqttToken asyncActionToken) {
                 log.info("客户端{},连接 mqtt 服务器成功", clientId);
