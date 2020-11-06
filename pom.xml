@@ -19,6 +19,7 @@
         <module>zyk-search-center</module>
         <module>zyk-auth-center</module>
         <module>zyk-mail-center</module>
+        <module>zyk-canal</module>
     </modules>
 
     <properties>
