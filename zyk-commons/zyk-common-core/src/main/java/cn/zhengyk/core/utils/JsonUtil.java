@@ -129,4 +129,8 @@ public class JsonUtil {
     public static byte[] writeValueAsBytes(Object obj) throws JsonProcessingException {
         return OBJECT_MAPPER.writeValueAsBytes(obj);
     }
+
+    public static <T> T writeValueAsBytes(byte[] bytes, Class<T> tClass) throws IOException {
+        return OBJECT_MAPPER.readValue(bytes, tClass);
+    }
 }
