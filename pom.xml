@@ -20,6 +20,7 @@
         <module>zyk-auth-center</module>
         <module>zyk-mail-center</module>
         <module>zyk-canal-sync</module>
+        <module>zyk-job</module>
     </modules>
 
     <properties>
