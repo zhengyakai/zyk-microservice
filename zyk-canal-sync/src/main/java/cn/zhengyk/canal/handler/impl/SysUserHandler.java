@@ -8,7 +8,6 @@ import java.util.Map;
 /**
  * @author by yakai.zheng
  * @Description schema: test下 sys_user 表的 增删改 binlog 处理
- * @Date 2020/11/9 10:42
  */
 @Component("test.sys_user")
 public class SysUserHandler implements DataDbHandler {

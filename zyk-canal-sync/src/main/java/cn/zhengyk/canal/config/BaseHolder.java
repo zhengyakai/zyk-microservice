@@ -12,7 +12,6 @@ import java.util.Map;
 /**
  * @author by yakai.zheng
  * @Description
- * @Date 2020/11/9 14:18
  */
 @Component
 public class BaseHolder implements ApplicationContextAware {
