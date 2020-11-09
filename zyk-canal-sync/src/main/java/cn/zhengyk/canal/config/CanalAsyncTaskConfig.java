@@ -14,10 +14,10 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 @EnableAsync
 @Configuration
-public class CanalThreadPoolConfig {
+public class CanalAsyncTaskConfig {
 
     @Bean("canal")
-    public Executor taskExecutor() {
+    public Executor canalTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(10);
         executor.setMaxPoolSize(20);

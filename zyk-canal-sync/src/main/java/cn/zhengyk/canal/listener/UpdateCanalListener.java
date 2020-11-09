@@ -1,12 +1,11 @@
 package cn.zhengyk.canal.listener;
 
-import cn.zhengyk.canal.config.EventHandlerConfig;
+import cn.zhengyk.canal.config.BaseHolder;
 import cn.zhengyk.canal.event.UpdateCanalEvent;
 import cn.zhengyk.canal.handler.DataDbHandler;
 import com.alibaba.otter.canal.protocol.CanalEntry.Column;
 import com.alibaba.otter.canal.protocol.CanalEntry.RowData;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,8 +19,6 @@ import java.util.Map;
 @Component
 public class UpdateCanalListener extends AbstractCanalListener<UpdateCanalEvent>{
 
-    @Autowired
-    private EventHandlerConfig eventHandlerConfig;
 
     @Override
     protected void doSync(String schemaName, String table, RowData rowData) {
@@ -30,7 +27,7 @@ public class UpdateCanalListener extends AbstractCanalListener<UpdateCanalEvent>
         List<Column> afterColumnsList = rowData.getAfterColumnsList();
         Map<String, String> beforeColumnsMap = columnsToMap(beforeColumnsList);
         Map<String, String> afterColumnsMap = columnsToMap(afterColumnsList);
-        DataDbHandler dataHandler = eventHandlerConfig.getDbDataHandler(schemaName + SCHEMA_TABLE_SEPARATOR + table);
+        DataDbHandler dataHandler = BaseHolder.getDbDataHandler(schemaName + SCHEMA_TABLE_SEPARATOR + table);
         if (dataHandler != null) {
             dataHandler.update(beforeColumnsMap, afterColumnsMap);
         }

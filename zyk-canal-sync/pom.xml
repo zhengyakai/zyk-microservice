@@ -13,6 +13,7 @@
     <description>canal 客户端监听 binlog 同步到es、redis</description>
 
     <dependencies>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>

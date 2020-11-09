@@ -1,5 +1,6 @@
 package cn.zhengyk.canal.schedule;
 
+import cn.zhengyk.canal.config.BaseHolder;
 import cn.zhengyk.canal.event.DeleteCanalEvent;
 import cn.zhengyk.canal.event.InsertCanalEvent;
 import cn.zhengyk.canal.event.UpdateCanalEvent;
@@ -9,12 +10,9 @@ import com.alibaba.otter.canal.protocol.CanalEntry.Entry;
 import com.alibaba.otter.canal.protocol.CanalEntry.EntryType;
 import com.alibaba.otter.canal.protocol.Message;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -27,9 +25,7 @@ import java.util.Optional;
  */
 @Slf4j
 @Component
-public class CanalSchedule implements ApplicationContextAware, DisposableBean {
-
-    private static ApplicationContext applicationContext;
+public class CanalSchedule implements DisposableBean {
 
     @Autowired
     private CanalConnector canalConnector;
@@ -55,13 +51,13 @@ public class CanalSchedule implements ApplicationContextAware, DisposableBean {
                             CanalEntry.EventType eventType = entry.getHeader().getEventType();
                             switch (eventType) {
                                 case INSERT:
-                                    applicationContext.publishEvent(new InsertCanalEvent(entry));
+                                    BaseHolder.applicationContext.publishEvent(new InsertCanalEvent(entry));
                                     break;
                                 case UPDATE:
-                                    applicationContext.publishEvent(new UpdateCanalEvent(entry));
+                                    BaseHolder.applicationContext.publishEvent(new UpdateCanalEvent(entry));
                                     break;
                                 case DELETE:
-                                    applicationContext.publishEvent(new DeleteCanalEvent(entry));
+                                    BaseHolder.applicationContext.publishEvent(new DeleteCanalEvent(entry));
                                     break;
                                 default:
                                     break;
@@ -80,11 +76,6 @@ public class CanalSchedule implements ApplicationContextAware, DisposableBean {
         } catch (Exception e) {
             log.error("Canal 定时消费 binlog 异常:", e);
         }
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        CanalSchedule.applicationContext = applicationContext;
     }
 
     @Override
