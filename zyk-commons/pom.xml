@@ -18,6 +18,7 @@
         <module>zyk-exception-spring-boot-starter</module>
         <module>zyk-common-core</module>
         <module>zyk-mqtt-spring-boot-starter</module>
+        <module>zyk-log-spring-boot-starter</module>
     </modules>
 
 

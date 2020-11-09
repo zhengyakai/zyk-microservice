@@ -17,6 +17,7 @@
             <groupId>cn.zhengyk</groupId>
             <artifactId>zyk-mail-client</artifactId>
             <version>0.0.1</version>
+            <optional>true</optional>
         </dependency>
 
         <dependency>

@@ -15,7 +15,7 @@ import java.util.Enumeration;
 @Slf4j
 public class IpUtil {
 
-    private IpUtil(){};
+    private IpUtil(){}
 
     public static String getHostIp() {
 
