@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Description
  * @Date 2020/10/15 17:38
  */
-@FeignClient(value = ApplicationNameConstants.MAIL, fallbackFactory = MailFeignClientFallback.class)
+@FeignClient(value = "zyk-mail", fallbackFactory = MailFeignClientFallback.class)
 public interface MailFeignClient {
 
     @PostMapping("sendExceptionEmail")

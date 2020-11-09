@@ -18,12 +18,9 @@ import org.springframework.stereotype.Component;
 public class MailFeignClientFallback implements FallbackFactory<MailFeignClient> {
     @Override
     public MailFeignClient create(Throwable throwable) {
-        return new MailFeignClient() {
-            @Override
-            public R<?> sendExceptionEmail(String subject, String content) {
-                LogUtil.logError(ApplicationNameConstants.MAIL, Thread.currentThread().getStackTrace()[1], throwable);
-                return R.fallback();
-            }
+        return (subject, content) -> {
+            LogUtil.logError("zyk-mail", Thread.currentThread().getStackTrace()[1], throwable);
+            return R.fallback();
         };
 
     }
