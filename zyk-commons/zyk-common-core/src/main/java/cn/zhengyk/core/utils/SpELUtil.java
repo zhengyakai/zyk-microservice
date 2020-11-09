@@ -30,13 +30,13 @@ public class SpELUtil {
     /**
      * 解析spEL表达式
      */
-    public static String getValBySpel(String spelLockKey, MethodSignature methodSignature, Object[] args) {
+    public static String getValBySpel(String spel, MethodSignature methodSignature, Object[] args) {
         //获取方法形参名数组
         String[] paramNames = NAME_DISCOVERER.getParameterNames(methodSignature.getMethod());
         if (paramNames == null || paramNames.length == 0) {
             return null;
         }
-        Expression expression = SPEL_EXPRESSION_PARSER.parseExpression(spelLockKey);
+        Expression expression = SPEL_EXPRESSION_PARSER.parseExpression(spel);
         // spring的表达式上下文对象
         EvaluationContext context = new StandardEvaluationContext();
         // 给上下文赋值
