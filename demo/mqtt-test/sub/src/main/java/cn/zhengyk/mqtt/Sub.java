@@ -3,6 +3,7 @@ package cn.zhengyk.mqtt;
 import cn.zhengyk.mqtt.core.MqttTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.IMqttAsyncClient;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,6 +31,6 @@ public class Sub implements InitializingBean {
             Thread.sleep(500);
         }
         // 订阅主题
-        mqttTemplate.subscribe("topic/test/a", 0, (topic, message) -> log.info("服务端:{}从topic:{},接收到消息:{}",clientId,topic, message));
+        IMqttToken mqttToken = mqttTemplate.subscribe("topic/test/a", 0, (topic, message) -> log.info("服务端:{}从topic:{},接收到消息:{}", clientId, topic, message));
     }
 }
