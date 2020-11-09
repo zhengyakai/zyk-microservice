@@ -5,9 +5,7 @@ import cn.zhengyk.canal.event.DeleteCanalEvent;
 import cn.zhengyk.canal.event.InsertCanalEvent;
 import cn.zhengyk.canal.event.UpdateCanalEvent;
 import com.alibaba.otter.canal.client.CanalConnector;
-import com.alibaba.otter.canal.protocol.CanalEntry;
-import com.alibaba.otter.canal.protocol.CanalEntry.Entry;
-import com.alibaba.otter.canal.protocol.CanalEntry.EntryType;
+import com.alibaba.otter.canal.protocol.CanalEntry.*;
 import com.alibaba.otter.canal.protocol.Message;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
@@ -16,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,31 +42,34 @@ public class CanalSchedule implements DisposableBean {
             Message message = canalConnector.getWithoutAck(batchSize);
             long batchId = message.getId();
             log.debug("batchId={}" , batchId);
+            List<Entry> entries = message.getEntries();
             try {
-                List<Entry> entries = message.getEntries();
-                if (batchId != -1 && entries.size() > 0) {
-                    entries.forEach(entry -> {
-                        if (entry.getEntryType() == EntryType.ROWDATA) {
-                            CanalEntry.EventType eventType = entry.getHeader().getEventType();
-                            switch (eventType) {
-                                case INSERT:
-                                    BaseHolder.applicationContext.publishEvent(new InsertCanalEvent(entry));
-                                    break;
-                                case UPDATE:
-                                    BaseHolder.applicationContext.publishEvent(new UpdateCanalEvent(entry));
-                                    break;
-                                case DELETE:
-                                    BaseHolder.applicationContext.publishEvent(new DeleteCanalEvent(entry));
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    });
+                if (batchId == -1) {
+                    canalConnector.ack(batchId);
+                    return;
+                }
+                for (Entry entry : entries) {
+                    if (entry.getEntryType() != EntryType.ROWDATA) {
+                        continue;
+                    }
+                    EventType eventType = entry.getHeader().getEventType();
+                    switch (eventType) {
+                        case INSERT:
+                            BaseHolder.applicationContext.publishEvent(new InsertCanalEvent(entry));
+                            break;
+                        case UPDATE:
+                            BaseHolder.applicationContext.publishEvent(new UpdateCanalEvent(entry));
+                            break;
+                        case DELETE:
+                            BaseHolder.applicationContext.publishEvent(new DeleteCanalEvent(entry));
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 canalConnector.ack(batchId);
             } catch (Exception e) {
-                log.error("批量获取 mysql 同步信息失败，batchId回滚,batchId=" + batchId, e);
+                log.error("批量获取 mysql 同步信息失败，batchId 回滚,batchId={}", batchId, e);
                 // 发生异常时，调用 rollback，那么下次抓取 binlog 的时候还会把上次异常的 binlog 抓过来。
                 // 如果异常一直存在那么会反复抓取，可能导致 binlog 消费阻塞，具体是 ack 还是 rollback 看业务而定
                 // canalConnector.ack(batchId);
