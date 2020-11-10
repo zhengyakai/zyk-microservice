@@ -39,14 +39,11 @@ public class HistoryLogAspect {
     private String applicationName;
 
     @Autowired
-    private HistoryLogProperties historyLogProperties;
-
-    @Autowired
     private LogHistoryService logHistoryService;
 
 
 
-    @Before("@within(historyLog) || @annotation(historyLog)")
+    @Before("@annotation(historyLog)")
     public void beforeMethod(JoinPoint joinPoint, HistoryLog historyLog) {
         LogHistory logHistory = this.getLogHistory(historyLog, joinPoint);
         logHistoryService.saveHistoryLog(logHistory);
@@ -68,8 +65,8 @@ public class HistoryLogAspect {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         // 可以从 session 里获取当前登录用户的信息
         HttpSession session = attributes.getRequest().getSession();
-        logHistory.setUserId("");
-        logHistory.setUserName("");
+        logHistory.setUserId("1");
+        logHistory.setUserName("zhengyk");
 
         String operation = historyLog.operation();
         if (operation.contains("#")) {
@@ -78,7 +75,7 @@ public class HistoryLogAspect {
             operation = SpELUtil.getValBySpel(operation, methodSignature, args);
         }
         logHistory.setOperation(operation);
-
+        logHistory.setBusinessModule(historyLog.businessModule());
         return logHistory;
     }
 }

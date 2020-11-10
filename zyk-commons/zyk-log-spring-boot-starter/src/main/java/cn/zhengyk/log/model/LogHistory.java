@@ -22,6 +22,10 @@ public class LogHistory {
      */
     private String applicationName;
     /**
+     * 业务模块
+     */
+    private String businessModule;
+    /**
      * 类名
      */
     private String className;

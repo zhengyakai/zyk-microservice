@@ -20,3 +20,5 @@ swagger:
   application-description: 生产者
   application-version: 0.0.1
   try-host: http://localhost:${server.port}
+history-log:
+  enabled: true

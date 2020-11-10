@@ -1,6 +1,7 @@
 package cn.zhengyk.producer.controller;
 
 import cn.zhengyk.api.DemoFeignClient;
+import cn.zhengyk.log.annotation.HistoryLog;
 import cn.zhengyk.producer.beans.Person;
 import cn.zhengyk.redis.lock.*;
 import io.swagger.annotations.Api;
@@ -56,7 +57,7 @@ public class ProducerController implements DemoFeignClient{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return "test1";
+        return "test3";
     }
 
     @Lock(key = "#person.username", leaseTime = 15000)
@@ -67,14 +68,20 @@ public class ProducerController implements DemoFeignClient{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return "test1";
+        return "test4";
     }
 
 
     @GetMapping("test5")
     public String test5(Person person) {
         int a = 1/0;
-        return "test1";
+        return "test5";
+    }
+
+    @GetMapping("test6")
+    @HistoryLog(businessModule = "user",operation = "'测试用户:' + #person.username")
+    public String test6(Person person) {
+        return "test6";
     }
 
 

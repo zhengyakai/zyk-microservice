@@ -19,10 +19,17 @@ import java.time.format.DateTimeFormatter;
 @ConditionalOnProperty(prefix = "history-log", name = "log-type", havingValue = "logger", matchIfMissing = true)
 public class LoggerHistoryServiceImpl implements LogHistoryService {
 
-    private static final String MSG_PATTERN = "{}|{}|{}|{}|{}|{}|{}";
+    private static final String MSG_PATTERN = "\r\n操作时间:{}\r\n" +
+            "应用名:{}\r\n" +
+            "业务模块:{}\r\n" +
+            "类名:{}\r\n" +
+            "方法名:{}\r\n" +
+            "用户id:{}\r\n" +
+            "用户名:{}\r\n" +
+            "操作信息:{}\r\n";
 
     /**
-     * 格式为：{时间}|{应用名}|{类名}|{方法名}|{用户id}|{用户名}|{操作信息}
+     *
      */
     @Override
     public void saveHistoryLog(LogHistory logHistory) {
@@ -30,6 +37,7 @@ public class LoggerHistoryServiceImpl implements LogHistoryService {
         log.info(MSG_PATTERN,
                 sdf.format(logHistory.getOperateTime()),
                 logHistory.getApplicationName(),
+                logHistory.getBusinessModule(),
                 logHistory.getClassName(),
                 logHistory.getMethodName(),
                 logHistory.getUserId(),
