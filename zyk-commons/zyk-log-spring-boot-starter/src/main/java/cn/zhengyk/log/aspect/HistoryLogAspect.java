@@ -41,6 +41,9 @@ public class HistoryLogAspect {
     @Autowired
     private LogHistoryService logHistoryService;
 
+    @Autowired(required = false)
+    private HttpServletRequest request;
+
 
 
     @Before("@annotation(historyLog)")
@@ -62,9 +65,8 @@ public class HistoryLogAspect {
         MethodSignature methodSignature = (MethodSignature)joinPoint.getSignature();
         logHistory.setClassName(methodSignature.getDeclaringTypeName());
         logHistory.setMethodName(methodSignature.getName());
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         // 可以从 session 里获取当前登录用户的信息
-        HttpSession session = attributes.getRequest().getSession();
+        HttpSession session = request.getSession();
         logHistory.setUserId("1");
         logHistory.setUserName("zhengyk");
 
