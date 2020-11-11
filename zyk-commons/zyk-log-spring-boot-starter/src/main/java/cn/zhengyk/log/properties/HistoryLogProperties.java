@@ -17,7 +17,7 @@ public class HistoryLogProperties {
     /**
      * 是否开启 历史日志 记录
      */
-    private Boolean enabled;
+    private Boolean enable;
 
     /**
      * 日志记录类型(logger/db/es)

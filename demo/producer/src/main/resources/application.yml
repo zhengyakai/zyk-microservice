@@ -27,7 +27,7 @@ swagger:
   application-version: 0.0.1
   try-host: http://localhost:${server.port}
 history-log:
-  enabled: true
+  enable: true
   log-type: es
 elasticsearch:
   host-list: 192.168.220.252:9200
