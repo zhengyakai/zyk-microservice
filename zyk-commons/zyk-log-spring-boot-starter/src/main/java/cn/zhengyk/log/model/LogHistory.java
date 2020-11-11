@@ -13,6 +13,8 @@ import java.util.Date;
 @Setter
 @Getter
 public class LogHistory {
+
+    private String id;
     /**
      * 操作时间
      */

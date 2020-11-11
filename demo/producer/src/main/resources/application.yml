@@ -13,6 +13,12 @@ spring:
         min-idle: 0
         max-idle: 10
         max-wait: 60000
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/zyk_microservices?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false&useSSL=false
+    username: root
+    password: Yakai1991@
 
 swagger:
   enable: true
@@ -22,3 +28,8 @@ swagger:
   try-host: http://localhost:${server.port}
 history-log:
   enabled: true
+  log-type: es
+elasticsearch:
+  host-list: 192.168.220.252:9200
+  username: elastic
+  password: pttl@123

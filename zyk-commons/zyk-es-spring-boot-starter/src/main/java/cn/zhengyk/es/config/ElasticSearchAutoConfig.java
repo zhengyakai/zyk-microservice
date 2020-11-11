@@ -20,7 +20,6 @@ import org.springframework.context.annotation.Configuration;
  * @author Yakai Zheng
  */
 @Configuration
-@ConditionalOnProperty(prefix = "elasticsearch", name = "enable", havingValue = "true")
 @EnableConfigurationProperties({ElasticSearchProperties.class, RestPoolProperties.class})
 public class ElasticSearchAutoConfig {
 
