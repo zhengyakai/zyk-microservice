@@ -1,5 +1,3 @@
-#org.springframework.context.ApplicationContextInitializer=\
-#com.central.log.config.TtlMDCAdapterInitializer
-#
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.zhengyk.log.aspect.HistoryLogAspect
+cn.zhengyk.log.aspect.HistoryLogAspect,\
+cn.zhengyk.log.config.LogAutoConfiguration

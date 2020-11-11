@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * @author by yakai.zheng
- * @Description 单纯用日志记录操作历史, 不管 log-type 是什么，都会执行此类
+ * @Description 单纯用日志记录操作历史
  * @Date 2020/11/9 18:16
  */
 @Slf4j

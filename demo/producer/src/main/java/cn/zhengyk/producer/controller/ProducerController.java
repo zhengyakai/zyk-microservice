@@ -6,8 +6,10 @@ import cn.zhengyk.producer.beans.Person;
 import cn.zhengyk.redis.lock.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,7 @@ import java.util.concurrent.TimeUnit;
  * @Date 2020/10/15 17:16
  */
 
+@Slf4j
 @Api("测试controller")
 @RestController
 public class ProducerController implements DemoFeignClient{
@@ -81,6 +84,7 @@ public class ProducerController implements DemoFeignClient{
     @GetMapping("test6")
     @HistoryLog(businessModule = "user",operation = "'测试用户:' + #person.username")
     public String test6(Person person) {
+        log.error(MDC.get("userId"));
         return "test6";
     }
 
