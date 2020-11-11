@@ -17,7 +17,7 @@
     <property name="CONSOLE_LOG_PATTERN"
               value="[${APP_NAME}:${ServerIP}:${ServerPort}] %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%level){blue} %clr(${PID}){magenta} %clr([%thread]){orange} %clr(%logger){cyan} %line %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx} %X{userId}" />
     <property name="CONSOLE_LOG_PATTERN_NO_COLOR"
-              value="[${APP_NAME}:${ServerIP}:${ServerPort}] %d{yyyy-MM-dd HH:mm:ss.SSS} %level ${PID} [%thread] %logger %line %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}" />
+              value="[${APP_NAME}:${ServerIP}:${ServerPort}] %d{yyyy-MM-dd HH:mm:ss.SSS} %level ${PID} [%thread] %logger %line %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx} %X{userId}" />
 
     <!-- 控制台日志 -->
     <appender name="StdoutAppender" class="ch.qos.logback.core.ConsoleAppender">

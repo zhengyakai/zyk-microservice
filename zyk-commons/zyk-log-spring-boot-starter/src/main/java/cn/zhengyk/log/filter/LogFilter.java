@@ -2,7 +2,6 @@ package cn.zhengyk.log.filter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -24,7 +23,7 @@ import java.io.IOException;
 public class LogFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        // 这里可以设置当前登录用户的相关信息
+        // 这里可以设置当前登录用户的相关信息，信息可以在网关里 set 到 session 或者 请求头里
         MDC.put("userId", "U1234");
         filterChain.doFilter(request, response);
     }
