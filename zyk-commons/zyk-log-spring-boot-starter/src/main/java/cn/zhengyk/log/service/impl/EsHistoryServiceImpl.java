@@ -1,6 +1,7 @@
 package cn.zhengyk.log.service.impl;
 
 import cn.zhengyk.core.utils.JsonUtil;
+import cn.zhengyk.es.service.ElasticsearchApi;
 import cn.zhengyk.log.model.LogHistory;
 import cn.zhengyk.log.service.LogHistoryService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,23 +30,13 @@ import java.util.UUID;
 @ConditionalOnProperty(prefix = "history-log", name = "log-type", havingValue = "es")
 public class EsHistoryServiceImpl implements LogHistoryService {
 
-
-    @Qualifier("restHighLevelClient")
     @Autowired
-    private RestHighLevelClient highLevelClient;
+    private ElasticsearchApi elasticsearchApi;
 
     @Async
     @Override
     public void saveHistoryLog(LogHistory logHistory) {
         String id = UUID.randomUUID().toString();
-
-        IndexRequest indexRequest = new IndexRequest("history_log");
-        try {
-            indexRequest.id(id);
-            indexRequest.source(JsonUtil.toJson(logHistory), XContentType.JSON);
-            highLevelClient.index(indexRequest, RequestOptions.DEFAULT);
-        } catch (Exception e) {
-            log.error("failed to insert index: {}, document: {}, id: {}.", "history_log", JsonUtil.toJson(logHistory), id, e);
-        }
+        elasticsearchApi.insertById("history_log", id, JsonUtil.toJson(logHistory), RequestOptions.DEFAULT);
     }
 }
