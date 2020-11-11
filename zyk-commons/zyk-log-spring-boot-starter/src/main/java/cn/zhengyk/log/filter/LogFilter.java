@@ -24,6 +24,7 @@ public class LogFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // 这里可以设置当前登录用户的相关信息，信息可以在网关里 set 到 session 或者 请求头里
+        // 打印的时候 可以在 logback-spring.xml  将其打印出来： %X{userId}
         MDC.put("userId", "U1234");
         filterChain.doFilter(request, response);
     }
