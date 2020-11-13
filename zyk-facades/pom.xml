@@ -9,12 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>zyk-platform</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>zyk-registration</module>
-        <module>zyk-gateway</module>
-    </modules>
-
+    <artifactId>zyk-facades</artifactId>
+    <description>facade 聚合层</description>
 
 </project>

@@ -219,3 +219,4 @@ INSERT INTO roles (username, role) VALUES ('nacos', 'ROLE_ADMIN');
 
 create user 'nacos'@'%' identified by 'nacos';
 grant all on nacos.* TO 'nacos'@'%' IDENTIFIED BY 'nacos';
+flush privileges;

@@ -21,6 +21,7 @@
         <module>zyk-mail-center</module>
         <module>zyk-canal-sync</module>
         <module>zyk-job</module>
+        <module>zyk-facades</module>
     </modules>
 
     <properties>
@@ -168,7 +169,11 @@
                 <version>${guava.version}</version>
             </dependency>
 
-
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-webflux</artifactId>
+                <version>${spring-boot-dependencies.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
