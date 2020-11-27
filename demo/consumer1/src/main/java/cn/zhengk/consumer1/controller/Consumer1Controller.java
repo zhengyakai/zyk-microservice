@@ -1,4 +1,4 @@
-package cn.zhengyk.consumer.controller;
+package cn.zhengk.consumer1.controller;
 
 import cn.zhengyk.api.DemoFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date 2020/10/15 17:16
  */
 @RestController
-public class ConsumerController {
+public class Consumer1Controller {
 
     @Autowired
     private DemoFeignClient demoFeignClient;
@@ -23,6 +23,6 @@ public class ConsumerController {
 
     @RequestMapping("testLb")
     public String testLb() {
-        return "consumer";
+        return "consumer1";
     }
  }

@@ -1,8 +1,30 @@
-server:
-  port: 8005
 spring:
   cloud:
-    nacos:
+    gateway:
       discovery:
-        server-addr: 127.0.0.1:8848
-        namespace: zyk-microservice
+        locator:
+          enabled: true
+      routes:
+        - id: requestratelimiter_route
+          uri: lb:consumer
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 20
+                key-resolver: "#{@userKeyResolver}"
+          predicates:
+            - Method=GET
+
+  redis:
+    host: 192.168.220.92
+    database: 1
+    password: pttlbmc
+    port: 6379
+    timeout: 20000
+    lettuce:
+      pool:
+        max-active: 100
+        min-idle: 0
+        max-idle: 10
+        max-wait: 60000
