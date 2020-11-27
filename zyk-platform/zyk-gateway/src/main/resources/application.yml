@@ -6,13 +6,13 @@ spring:
           enabled: true
       routes:
         - id: requestratelimiter_route
-          uri: lb:consumer
+          uri: https://www.baidu.com
           filters:
             - name: RequestRateLimiter
               args:
                 redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 20
-                key-resolver: "#{@userKeyResolver}"
+                redis-rate-limiter.burstCapacity: 3
+                key-resolver: "#{@ipKeyResolver}"
           predicates:
             - Method=GET
 
@@ -22,9 +22,3 @@ spring:
     password: pttlbmc
     port: 6379
     timeout: 20000
-    lettuce:
-      pool:
-        max-active: 100
-        min-idle: 0
-        max-idle: 10
-        max-wait: 60000
