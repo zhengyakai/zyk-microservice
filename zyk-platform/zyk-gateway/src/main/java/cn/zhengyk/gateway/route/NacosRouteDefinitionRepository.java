@@ -25,8 +25,8 @@ import java.util.concurrent.Executor;
 @Slf4j
 @Component
 public class NacosRouteDefinitionRepository implements RouteDefinitionRepository {
-    private static final String SCG_DATA_ID = "scg-routes";
-    private static final String SCG_GROUP_ID = "SCG_GATEWAY";
+    private static final String SPRING_CLOUD_GATEWAY_DATA_ID = "spring-cloud-gateway-routes";
+    private static final String SPRING_CLOUD_GATEWAY_GROUP_ID = "spring-cloud-gateway";
 
     @Autowired
     private ApplicationEventPublisher publisher;
@@ -37,7 +37,7 @@ public class NacosRouteDefinitionRepository implements RouteDefinitionRepository
     @Override
     public Flux<RouteDefinition> getRouteDefinitions() {
         try {
-            String content = nacosConfigManager.getConfigService().getConfig(SCG_DATA_ID, SCG_GROUP_ID,5000);
+            String content = nacosConfigManager.getConfigService().getConfig(SPRING_CLOUD_GATEWAY_DATA_ID, SPRING_CLOUD_GATEWAY_GROUP_ID,5000);
             List<RouteDefinition> routeDefinitions = JSONObject.parseArray(content, RouteDefinition.class);
             return Flux.fromIterable(routeDefinitions);
         } catch (NacosException e) {
@@ -52,7 +52,7 @@ public class NacosRouteDefinitionRepository implements RouteDefinitionRepository
     @PostConstruct
     private void addListener() {
         try {
-            nacosConfigManager.getConfigService().addListener(SCG_DATA_ID, SCG_GROUP_ID, new Listener() {
+            nacosConfigManager.getConfigService().addListener(SPRING_CLOUD_GATEWAY_DATA_ID, SPRING_CLOUD_GATEWAY_GROUP_ID, new Listener() {
                 @Override
                 public Executor getExecutor() {
                     return null;
