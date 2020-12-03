@@ -37,6 +37,7 @@ public class NacosRouteDefinitionRepository implements RouteDefinitionRepository
     @Override
     public Flux<RouteDefinition> getRouteDefinitions() {
         try {
+            // 这里 nacos 上的路由配置采用 json 形式
             String content = nacosConfigManager.getConfigService().getConfig(SPRING_CLOUD_GATEWAY_DATA_ID, SPRING_CLOUD_GATEWAY_GROUP_ID,5000);
             List<RouteDefinition> routeDefinitions = JSONObject.parseArray(content, RouteDefinition.class);
             return Flux.fromIterable(routeDefinitions);
