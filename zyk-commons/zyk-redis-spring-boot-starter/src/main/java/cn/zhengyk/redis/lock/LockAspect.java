@@ -54,7 +54,7 @@ public class LockAspect {
             if (zLock != null && zLock.locked()) {
                 return point.proceed();
             } else {
-                throw new LockException("获取锁失败");
+                throw new LockException("获取锁["+lockKey+"]失败");
             }
         }
     }
