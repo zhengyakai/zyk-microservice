@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.redisson.api.RLock;
 
-import java.util.Optional;
-
 /**
  * @author by yakai.zheng
  * @Description  实现 AutoCloseable, 使用 try-with-resource 语句可以自动解锁
@@ -19,12 +17,12 @@ public class ZLock implements AutoCloseable{
 
     @Override
     public void close() {
-        if (rLock != null && this.locked()) {
+        if (this.locked()) {
             rLock.unlock();
         }
     }
 
     public boolean locked() {
-        return rLock != null && rLock.isLocked();
+        return rLock != null && rLock.isHeldByCurrentThread();
     }
 }
