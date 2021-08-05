@@ -7,8 +7,8 @@ import cn.zhengyk.log.properties.HistoryLogProperties;
 import cn.zhengyk.log.service.LogHistoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +17,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -46,8 +45,8 @@ public class HistoryLogAspect {
 
 
 
-    @Before("@annotation(historyLog)")
-    public void beforeMethod(JoinPoint joinPoint, HistoryLog historyLog) {
+    @After("@annotation(historyLog)")
+    public void afterMethod(JoinPoint joinPoint, HistoryLog historyLog) {
         LogHistory logHistory = this.getLogHistory(historyLog, joinPoint);
         logHistoryService.saveHistoryLog(logHistory);
     }
